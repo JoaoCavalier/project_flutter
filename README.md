@@ -15,7 +15,7 @@ GESTO APP é um projeto pessoal de controle de gastos feito em flutter.
   - Tela de Cadastro de Receitas e Despesas com categorias e formatação monetária.
  
 # Instalação
-  - **Pré-requisitos:** Certifique-se de ter o Flutter e o Dart Instalados assim como os pluguins correspondentes em sua IDE.
+  - **Pré-requisitos:** Certifique-se de ter o Flutter e o Dart Instalados assim como os pluguins em sua IDE.
   - **Clone o Repositório:** Clone este repositório para a sua máquina local.
   - **Instale as Dependências:** Instale todas as dependencias necessárias do projeto.
   - **Execute o Aplicativo:** Inicie o Aplicativo em um emulador ou dispositivo Físico.
