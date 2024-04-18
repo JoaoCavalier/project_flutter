@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_flutter/services/authentication.service.dart';
 import 'package:projeto_flutter/telas/despesas.dart';
@@ -56,27 +55,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            width: 500,
-            height: 500,
-            child: PieChart(
-              PieChartData(
-                centerSpaceRadius: 60,
-                sections: [
-                  PieChartSectionData(
-                      value: 30, color: Colors.red, title: 'Despesas'),
-                  PieChartSectionData(
-                      value: 70, color: Colors.green, title: 'Receitas')
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      
     );
   }
 }

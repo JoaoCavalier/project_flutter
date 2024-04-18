@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -181,8 +183,10 @@ class _DespesasScreenState extends State<DespesasScreen> {
                           },
                           body: Column(
                             children: <Widget>[
-                              _buildCategoryItem("Investimento"),
-                              _buildCategoryItem("Salário"),
+                              _buildCategoryItem("Casa"),
+                              _buildCategoryItem("Educação"),
+                              _buildCategoryItem("Lazer"),
+                              _buildCategoryItem("Viagem"),
                             ],
                           ),
                           isExpanded: _isExpanded,
@@ -193,7 +197,20 @@ class _DespesasScreenState extends State<DespesasScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _addValue,
-                    child: const Text('Adicionar à Lista'),
+                    child: const Text(
+                      'Adicionar à Lista',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      minimumSize: Size(150, 48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Column(
@@ -207,7 +224,7 @@ class _DespesasScreenState extends State<DespesasScreen> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                color: Colors.green,
+                                color: Colors.red,
                               ),
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
@@ -240,6 +257,14 @@ class _DespesasScreenState extends State<DespesasScreen> {
                                           style: const TextStyle(
                                             fontSize: 16,
                                             color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          _enteredValues[index]["categoria"]!,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.red,
                                           ),
                                         ),
                                       ],

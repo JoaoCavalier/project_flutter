@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -16,8 +18,10 @@ class ReceitasScreen extends StatefulWidget {
 
 class _ReceitasScreenState extends State<ReceitasScreen> {
   final TextEditingController _receitasNomeController = TextEditingController();
-  final TextEditingController _receitasValorController = TextEditingController();
-  final TextEditingController _receitasCategoriaController = TextEditingController();
+  final TextEditingController _receitasValorController =
+      TextEditingController();
+  final TextEditingController _receitasCategoriaController =
+      TextEditingController();
 
   final List<Map<String, String>> _enteredValues = [];
 
@@ -25,12 +29,12 @@ class _ReceitasScreenState extends State<ReceitasScreen> {
   String _selectedCategory = 'Categorias';
 
   String formatCurrency(String value) {
-    final formatCurrency = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+    final formatCurrency =
+        NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
     value = value.replaceAll("R\$", "").replaceAll(",", ".");
     double parsedValue = double.parse(value);
     String formattedValue = formatCurrency.format(parsedValue);
     return formattedValue;
-
   }
 
   void _handleExpansion(bool isExpanded) {
@@ -137,7 +141,9 @@ class _ReceitasScreenState extends State<ReceitasScreen> {
                         if (number == null) {
                           return oldValue;
                         }
-                        final formattedNumber = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(number / 100);
+                        final formattedNumber = NumberFormat.currency(
+                                locale: 'pt_BR', symbol: 'R\$')
+                            .format(number / 100);
                         return newValue.copyWith(
                           text: formattedNumber,
                           selection: TextSelection.collapsed(
@@ -179,6 +185,8 @@ class _ReceitasScreenState extends State<ReceitasScreen> {
                             children: <Widget>[
                               _buildCategoryItem("Investimento"),
                               _buildCategoryItem("Salário"),
+                              _buildCategoryItem("Presente"),
+                              _buildCategoryItem("Prêmio"),
                             ],
                           ),
                           isExpanded: _isExpanded,
@@ -189,7 +197,20 @@ class _ReceitasScreenState extends State<ReceitasScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _addValue,
-                    child: const Text('Adicionar à Lista'),
+                    child: const Text(
+                      'Adicionar à Lista',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize: Size(150, 48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Column(
@@ -243,7 +264,8 @@ class _ReceitasScreenState extends State<ReceitasScreen> {
                                           _enteredValues[index]["categoria"]!,
                                           style: const TextStyle(
                                             fontSize: 16,
-                                            color: Color.fromARGB(255, 4, 77, 7),
+                                            color:
+                                                Color.fromARGB(255, 4, 77, 7),
                                           ),
                                         ),
                                       ],
