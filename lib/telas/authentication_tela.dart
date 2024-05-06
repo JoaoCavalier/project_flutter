@@ -4,6 +4,8 @@ import 'package:projeto_flutter/_common/my_colors.dart';
 import 'package:projeto_flutter/_common/my_snackbar.dart';
 import 'package:projeto_flutter/components/decoration_field_authentication.dart';
 import 'package:projeto_flutter/services/authentication.service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AthenticationTela extends StatefulWidget {
   const AthenticationTela({super.key});
@@ -22,6 +24,8 @@ class _AthenticationTelaState extends State<AthenticationTela> {
   final TextEditingController _confirmController = TextEditingController();
 
   final AuthenticationService authenService = AuthenticationService();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +154,42 @@ class _AthenticationTelaState extends State<AthenticationTela> {
                         },
                         child: Text((queroEntrar) ? 'Login' : 'Cadastrar'),
                       ),
+                      Visibility(
+                        visible: queroEntrar,
+                        child: const Center(
+                          child: Text(
+                            "ou",
+                            style: TextStyle(color: Colors.deepPurple),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: queroEntrar,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            signInWithGoogle().then((UserCredential user) {
+                              print(user);
+                            });
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Container(
+                                width: 25,
+                                height: 35,
+                                child: Image.network(
+                                    'http://pngimg.com/uploads/google/google_PNG19635.png',
+                                    fit: BoxFit.cover),
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              const Text("Logar com o Google")
+                            ],
+                          ),
+                        ),
+                      ),
                       const Divider(
                         color: MyColors.black,
                       ),
@@ -176,6 +216,19 @@ class _AthenticationTelaState extends State<AthenticationTela> {
     );
   }
 
+  Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   mainButtonClick() {
     String email = _emailController.text;
     String senha = _senhaController.text;
@@ -191,7 +244,9 @@ class _AthenticationTelaState extends State<AthenticationTela> {
   }
 
   _entrarUsuario({required String email, required String senha}) {
-    authenService.entrarUsuario(email: email, senha: senha).then((String? erro) {
+    authenService
+        .entrarUsuario(email: email, senha: senha)
+        .then((String? erro) {
       if (erro == null) {
         showSnackBar(
           context: context,
