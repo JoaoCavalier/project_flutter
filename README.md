@@ -6,7 +6,7 @@ GESTO APP é um projeto pessoal de controle de gastos feito em flutter.
   - **Flutter:** Framework de desenvolvimento multiplataforma usado para criar o aplicativo.
   - **Visual Studio Code:** Editor de código-fonte.
   - **Android Studio:** Ambiente de desenvolvimento ( Usado para criar o emulador ).
-  - ** Git:** Sistema de controle de versão de códigos.
+  - **Git:** Sistema de controle de versão de códigos.
   - **Node.Js:** Software de código aberto.
 
 # Funcionalidades
